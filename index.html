@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Conimex Virtual Assistant</title>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8" />
+    <title>Conimex-Virtual-Assistant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        html, body {
+          background-image: url("Images/imageBGDutch.PNG");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    <!-- add the below codes in qa page -->
+        <link href="./botchat.css" rel="stylesheet" />
+        <link href="./botchat-fullwindow.css" rel="stylesheet" />
+        <link href="./jquery-min-autoCompleteCG.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="./botchat.js" type="text/javascript"></script>
+        <script src="./botchat-es5.js" type="text/javascript"></script>
+        <script src="./custom.js" type="text/javascript"></script>
+        <link href="./custom.css" rel="stylesheet"></link>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</head>
+
+<body>
+    <div class="minimized"><span class="messages"></span></div>
+<!-- <button type="button" id="formButton">Start Chat</button> -->
+<!-- <div id="prechatForm" method="post">
+        <div class="centered">
+            <a style="font-weight:bold;">Wat is je naam? </a><a style="color:red;">*</a> <br /> 
+            <input id="firstName" name="liveagent.prechat:FirstNameDetail" required="true" type="text" autocomplete='false'/> <br /><br />
+            <input id="prechat_submit" onClick="return setName()" type="submit" value="Aanvragen van chat" />
+        </div>
+        
+        <div class="footer">
+            <p style="color:red;">Alle velden met * zijn verplicht om in te vullen.</p>               
+        </div>
+</div> -->
+
+<div id="BotChatElement"></div>
+<script>
+// var input;
+// var user;
+// var model;
+// function setName() {
+//             input = document.getElementById("firstName").value;
+//             console.log(input);
+//             user = {
+//             id: 'user-id',
+//             name: input
+//         };
+
+var model = {
+  "userId": "4w5peXy0ZpA",
+  "userName": "You",
+  "botId": "Test_SnowTicket_Bot",
+  "botIconUrl": "https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png",
+  "botName": "Test_SnowTicket_Bot",
+  "secret": "k2rmjjuG5gM.cwA.XiA.QRamxcxok7zGRMGTdfCWGIL0W6XYK9xmqs9uCTXqXFA",
+  "iconUrl": "https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png",
+  "directLineUrl": "https://webchat.botframework.com/v3/directline",
+    "webSocketEnabled": "true",
+    "speechTokenEndpoint": "https://api.botframework.com/v3/speechtoken",
+    "useLatestWebChat": false
+};
+
+        botConnection = new BotChat.DirectLine({
+        secret: model.secret,
+        token: model.token,
+        domain: model.directLineUrl,
+        webSocket: true
+        });
+
+        BotChat.App({
+            botConnection: botConnection,
+            sendTyping: true,
+            user: { id: model.userId, name: model.userName, hostName: window.location.href },
+            bot: { id: model.botId, name: model.botName },
+            resize: 'window',
+            locale: 'en'
+         }, document.getElementById("BotChatElement"));
+
+        //$(".wc-chatview-panel").show();
+        //$("#prechatForm").hide();
+        //$("#formButton").hide();
+        //return false;
+    //}
+
+/*added by CG*/
+ var reloadButtonMessage = function(){
+    botConnection
+    .postActivity({ type: "event", value: "", from: { id: "me" }, name: "reloadButtonClicked" })
+    .subscribe(function(id){console.log("success")});
+    }
+</script>
+
+</body>
+</html>
